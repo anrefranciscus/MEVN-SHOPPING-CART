@@ -9,6 +9,7 @@ db.mongoose = mongoose
 db.url = dbConfig.url
 
 db.products = require('./product.model')(mongoose)
+db.orders = require('./order.model')(mongoose)
 
 module.exports = db
 
