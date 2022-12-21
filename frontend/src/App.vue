@@ -1,42 +1,35 @@
 <template>
   <div id="app">
-    <div id="nav-bar">
-      <router-link :to="{ name: 'product'}" id="products-link">Product</router-link>
-      <router-link :to="{ name: 'productdetail', params: {id: 123}}" id="products-link">Detail</router-link>
-      <router-link :to="{ name: 'cart'}" id="products-link">Cart</router-link>
-    </div>
+    <NavbarCard/>
     <router-view/>
   </div>
 </template>
 <script>
-
+import NavbarCard from './components/NavbarCard.vue'
+export default {
+  name: 'App',
+  components: {NavbarCard}
+}
 </script>
 <style>
 * {
   box-sizing: border-box;
   font-family: Arial;
 }
-#nav-bar {
-  border-bottom: 1px solid #ddd;
-  height: 75px;
-  width: 100%;
+#page-wrap {
+  margin: auto;
+  max-width: 800px;
+  min-height: 100vh;
 }
-#products-link {
-  text-align: center;
-  display: block;
-  color: #41B883;
-  font-size: 22px;
-  left: 32px;
-  position: absolute;
-  top: 16px;
-  text-decoration: none;
-}
-#products-link h1 {
-    margin: 0;
-}
-#cart-link {
-  position: absolute;
-  right: 16px;
-  top: 16px;
+button {
+  background-color: #41B883;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  outline: 0;
+  padding: 16px;
 }
 </style>
