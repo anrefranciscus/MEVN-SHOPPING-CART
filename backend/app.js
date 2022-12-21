@@ -7,12 +7,26 @@ const PORT = process.env.PORT || 8081
 app.use(express.json())
 app.use(express.urlencoded( {extended: true }))
 
+const db = require('./app/models')
+db.mongoose.set("strictQuery", false);
+db.mongoose
+.connect(db.url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then((result) => {
+    console.log("Database connected!")
+}).catch((err) => {
+    console.log("Cannot Connect Database", err)
+    process.exit()
+})
 
 app.get('/', (req, res) => {
     res.json({
         message: 'Welcome to mevn store'
     })
 })
+
+require('./app/routes/product.route')(app)
 
 app.listen(PORT, () => {
     console.log(`server is running on http://localhost:${PORT}`)
