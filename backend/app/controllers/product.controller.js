@@ -8,7 +8,21 @@ exports.findAll = (req, res) => {
     })
     .catch((err) => {
         res.status(409).send({
-            message: err.message
+            message: err.message || "Some error while retrieving product."
+        })
+    })
+}
+
+exports.findOne = (req, res) => {
+    Product.findOne({
+        code: req.params.id
+    })
+    .then((result) => {
+        res.send(result)
+    })
+    .catch((err) => {
+        res.status(500).send({
+            message: err.message || "Some error while retrieving product."
         })
     })
 }
