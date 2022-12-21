@@ -1,4 +1,4 @@
-# anrestore-client
+# frontend
 
 ## Project setup
 ```
