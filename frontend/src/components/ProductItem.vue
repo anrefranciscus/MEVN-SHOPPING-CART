@@ -1,12 +1,12 @@
 <template>
     <div class="product-item">
-        <img :src="product.imageUrl" alt="image product"/>
+        <img :src="`http://localhost:8000${product.imageUrl}`" alt="image product"/>
         <h3 class="product-name">{{ product.name }}</h3>
         <p class="product-price">{{ new Intl.NumberFormat("id", {
             style: "currency",
             currency: "IDR"
         }).format(product.price) }}</p>
-        <router-link :to="{ name: 'productdetail', params: {id: product.id}}">
+        <router-link :to="{ name: 'productdetail', params: {id: product.code}}">
             <button>Detail</button>
         </router-link>
     </div>

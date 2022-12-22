@@ -9,7 +9,7 @@
     </div>
 </template>
 <script>
-import {products} from "../../data-seed"
+import axios from "axios"
 import ProductItem from "../../components/ProductItem.vue"
 import NotFound from '../errors/NotFound.vue'
 
@@ -20,8 +20,20 @@ export default {
     },
     data(){
         return {
-            products
+            products: []
         }
+    },
+    created(){
+        axios.get(`http://localhost:8000/api/products`)
+        .then(({data, status}) => {
+            if(status === 200) {
+                this.products = data
+                console.log(this.products)
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 }
 </script>

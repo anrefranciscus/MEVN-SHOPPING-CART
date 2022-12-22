@@ -16,14 +16,14 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
 import ItemCart from '@/components/ItemCart.vue';
-import { cartItems } from '@/data-seed';
 export default {
     name: 'CartProduct',
     components: {ItemCart},
     data(){
         return {
-            cartItems
+            cartItems: []
         }
     },
     computed: {
@@ -34,6 +34,28 @@ export default {
                 0
             )
         }
+    },
+    async created(){
+        const result = await axios.get(`http://localhost:8000/api/orders/user/1`)
+        let data = Object.assign({}, 
+            ...(result.data.map(
+                result => ({
+                    cart_items: result.products
+                })
+            ))
+        )
+        this.cartItems = data.cart_items
+        console.log(this.cartItems)
+        // axios.get(`http://localhost:8000/api/orders/user/1`)
+        // .then(({data, status}) => {
+        //     if (status === 200) {
+        //         this.cartItems = data
+        //         console.log('DATA_CART_ITEM', data)
+        //     }
+        // })
+        // .catch(err => {
+        //     console.log(err)
+        // })
     }
 }
 
