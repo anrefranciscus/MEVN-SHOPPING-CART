@@ -1,11 +1,12 @@
 <template>
     <div>
         <div id="page-wrap">
-            <h1>Shopping Cart</h1>
+            <h1>Your Cart</h1>
             <ItemCart
             v-for="item in cartItems"
             :key="item.id"
             :item="item"
+            v-on:remove-item="removeFromCart($event)"
             />
             <h3 id="total-price">Total: {{ new Intl.NumberFormat("id", {
                 style: "currency",
@@ -33,6 +34,24 @@ export default {
                 (sum, item ) => sum + Number(item.price),
                 0
             )
+        }
+    },
+    methods: {
+        removeFromCart(product){
+            // console.log(product)
+            axios.delete(`http://localhost:8000/api/orders/delete/user/1/product/${product}`,)
+            .then(({status}) => {
+                if (status === 200) {
+                    let indexCart = this.cartItems.map(function(item) {
+                        return item.code
+                    }).indexOf(product)
+
+                    this.cartItems.splice(indexCart, 1)
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
         }
     },
     async created(){

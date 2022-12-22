@@ -8,14 +8,13 @@
                 currency: "IDR"    
             }).format(item.price) }}</h3>
         </div>
-        <button class="remove-button">Remove</button>
+        <button class="remove-button" @click="$emit('remove-item', item.code)">Remove</button>
     </div>
 </template>
 <script>
 export default {
     name: 'ItemCart',
-    props: ['item']
-
+    props: ['item'],
 }
 </script>
 <style scoped>

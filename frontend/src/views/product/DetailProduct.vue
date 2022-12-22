@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div id="page-wrap">
+        <div id="page-wrap" v-if="product">
+            <!-- <h4 v-if="notification" class="notification">Add To Cart Successfully</h4> -->
             <div id="img-wrap">
                 <img :src="`http://localhost:8000${product.imageUrl}`" alt="" />
             </div>
@@ -11,7 +12,7 @@
                     currency: "IDR"    
                 }).format(product.price)}}</h3>
                 <p>{{ product.averageRating }}</p>
-                <button id="add-to-cart">Add to Cart</button>
+                <button id="add-to-cart" @click="addToCart(product.code)">Add to Cart</button>
                 <p>{{ product.description }}</p>
             </div>
         </div>
@@ -23,16 +24,28 @@ export default {
     name: "DetailProduct",
     data(){
         return {
-            product: {}
+            product: {},
+            notification: false
         }
     },
-    // computed: {
-    //     product(){
-    //         return this.products.find((p) => {
-    //             return p.id === this.$route.params.id
-    //         })
-    //     }
-    // },
+    methods: {
+        addToCart(product){
+            axios.post(`http://localhost:8000/api/orders//update/user/1`, {
+                product: product
+            })
+            .then(({data, status}) => {
+                if(status === 200) {
+                    console.log(data)
+                    // this.notification = true
+                    this.$swal(
+                        'Added',
+                        'Add to Cart Successfuly.',
+                        'Success'
+                    )
+                }
+            })
+        }
+    },
     created(){
         const code = this.$route.params.id
         axios.get(`http://localhost:8000/api/products/${code}`)
@@ -75,6 +88,13 @@ export default {
     position: absolute;
     top: 24px;
     right: 16px;
+  }
+  .notification {
+    text-align: center;
+    color: white;
+    background-color: #41B883;
+    padding: 3%;
+    border-radius: 8px;
   }
 </style>
   
