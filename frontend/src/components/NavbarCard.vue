@@ -1,16 +1,19 @@
 <template>
     <div id="nav-bar">
         <router-link :to="{ name: 'product'}" id="products-link">
-          <h1>Mevn Store</h1>
+          <h1>{{ $t('highlight.versatile.value') }}</h1>
         </router-link>
         <router-link :to="{ name: 'cart'}" id="cart-link">
-            <button>Cart</button>
+            <button>{{ $t('textbutton.textcart.value') }}</button>
         </router-link>
+        <!-- <ChangeLanguage/> -->
     </div>
 </template>
 <script>
+// import ChangeLanguage from './ChangeLanguage.vue'
 export default { 
-    name: 'NavbarCard'
+    name: 'NavbarCard',
+
 }
 </script>
 <style scoped>
@@ -18,6 +21,7 @@ export default {
     border-bottom: 1px solid #ddd;
     height: 75px;
     width: 100%;
+    display: flex;
   }
   #products-link {
     text-align: center;

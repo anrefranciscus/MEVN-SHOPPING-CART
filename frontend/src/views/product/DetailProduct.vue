@@ -1,7 +1,6 @@
 <template>
     <div>
         <div id="page-wrap" v-if="product">
-            <!-- <h4 v-if="notification" class="notification">Add To Cart Successfully</h4> -->
             <div id="img-wrap">
                 <img :src="`http://localhost:8000${product.imageUrl}`" alt="" />
             </div>
@@ -12,7 +11,7 @@
                     currency: "IDR"    
                 }).format(product.price)}}</h3>
                 <p>{{ product.averageRating }}</p>
-                <button id="add-to-cart" @click="addToCart(product.code)">Add to Cart</button>
+                <button id="add-to-cart" @click="addToCart(product.code)">{{ $t('textbutton.textaddcart.value') }}</button>
                 <p>{{ product.description }}</p>
             </div>
         </div>

@@ -1,7 +1,6 @@
 <template>
     <div>
         <div id="page-wrap">
-            <h1>Your Cart</h1>
             <ItemCart
             v-for="item in cartItems"
             :key="item.id"
@@ -34,7 +33,7 @@ export default {
                 (sum, item ) => sum + Number(item.price),
                 0
             )
-        }
+        },
     },
     methods: {
         removeFromCart(product){

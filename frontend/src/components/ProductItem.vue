@@ -7,7 +7,7 @@
             currency: "IDR"
         }).format(product.price) }}</p>
         <router-link :to="{ name: 'productdetail', params: {id: product.code}}">
-            <button>Detail</button>
+            <button>{{ $t('textbutton.textdetail.value') }}</button>
         </router-link>
     </div>
 </template>

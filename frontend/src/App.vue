@@ -1,14 +1,21 @@
 <template>
   <div id="app">
     <NavbarCard/>
-    <router-view/>
+    <ChangeLanguage/>
+    <router-view :msg="welcomeMessage"/>
   </div>
 </template>
 <script>
+import ChangeLanguage from './components/ChangeLanguage.vue'
 import NavbarCard from './components/NavbarCard.vue'
 export default {
   name: 'App',
-  components: {NavbarCard}
+  components: {NavbarCard, ChangeLanguage},
+  computed: {
+    welcomeMessage(){
+      return this.$t('welcomeMessage')
+    }
+  }
 }
 </script>
 <style>
