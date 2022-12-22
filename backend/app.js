@@ -1,8 +1,16 @@
 const express = require('express')
-
+const cors = require('cors')
 const app = express()
+
+// let corsOption = {
+//     origin: "http://localhost:8000"
+// }
+app.use(cors({
+    origin: "*"
+}));
+//app.use(cors(corsOption))
 const path = require('path')
-const PORT = process.env.PORT || 8081
+const PORT = process.env.PORT || 8000
 
 app.use(express.json())
 app.use(express.urlencoded( {extended: true }))
@@ -34,3 +42,4 @@ require('./app/routes/order.route')(app)
 app.listen(PORT, () => {
     console.log(`server is running on http://localhost:${PORT}`)
 })
+
